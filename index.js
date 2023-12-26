@@ -8,17 +8,21 @@ const serialPort = new SerialPort({
 serialPort.on("open", function() {
   console.log("-- Connection opened --");
 
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
-  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
+  serialPort.write(Buffer.from('123213123123123123\n'))
 
   serialPort.close()
 });
