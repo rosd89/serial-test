@@ -35,7 +35,7 @@ serialPort.on("open", function() {
       114, 115, 116,  32, 108, 105, 110, 101,  27,  45,   1,  29,
       86,   1
     ]
-  ), 'binary', (err) => {
+  ), (err) => {
     console.log(err)
   })
 

@@ -2,7 +2,7 @@ const { SerialPort } = require('serialport');
 const iconv = require('iconv-lite');
 
 const port = new SerialPort({
-  path: 'COM16',
+  path: 'COM2',
   baudRate: 19200,
   stopBits: 1,
   parity: 'none',
@@ -23,7 +23,7 @@ const printWithSerialPort = () => {
       86,   1
     ])
 
-    port.write(command, 'binary', (err) => {
+    port.write(command, (err) => {
       if (err) {
         console.error('Error on write: ', err.message);
         closePort()
