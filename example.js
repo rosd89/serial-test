@@ -17,7 +17,6 @@ async function example() {
   console.log('Printer connected:', isConnected);
 
   printer.alignCenter();
-  await printer.printImage('./assets/olaii-logo-black-small.png');
 
   printer.alignLeft();
   printer.newLine();
@@ -65,20 +64,6 @@ async function example() {
   printer.setTextNormal();
   printer.println('This is normal');
   printer.drawLine();
-
-  try {
-    printer.printBarcode('4126570807191');
-    printer.code128('4126570807191', {
-      height: 50,
-      text: 1,
-    });
-    printer.beep();
-  } catch (error) {
-    console.error(error);
-  }
-
-  printer.pdf417('4126565129008670807191');
-  printer.printQR('https://olaii.com');
 
   printer.newLine();
 
