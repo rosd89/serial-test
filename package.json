@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-thermal-printer": "^4.4.1",
     "serialport": "^12.0.0"
   }
 }

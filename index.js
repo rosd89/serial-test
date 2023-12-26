@@ -1,6 +1,5 @@
 const {SerialPort} = require("serialport");
 
-console.log(SerialPort)
 const serialPort = new SerialPort({
   path: 'COM2',
   baudRate: 9600
@@ -9,15 +8,17 @@ const serialPort = new SerialPort({
 serialPort.on("open", function() {
   console.log("-- Connection opened --");
 
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
-  serialPort.write('123213123123123123\n')
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
+  serialPort.write(new Buffer('123213123123123123\n'))
 
   serialPort.close()
 });
