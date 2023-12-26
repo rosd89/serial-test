@@ -23,7 +23,7 @@ const printWithSerialPort = () => {
       86,   1
     ])
 
-    port.write(command, 'ascii', (err) => {
+    port.write(command, 'binary', (err) => {
       if (err) {
         console.error('Error on write: ', err.message);
         closePort()
