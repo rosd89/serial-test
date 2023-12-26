@@ -13,18 +13,15 @@ const port = new SerialPort({
 const printWithSerialPort = () => {
 
   const printContent = async () => {
-    var command = '';
-    command += '\x1b@' // Reset Printer
-    command += '\x1ba\x00' // 80mm paper size
-    command += '\x1DL\x1D\x00' // 16mm left margin
-    command += '\x1B\x02' // Initial Line Spacing
-    command += '\x1b!FS' //COLLECTIVE SETTING OF KOREAN CHARACTER PRINTING_MODE
-    command += '\x1b&FS' // SET KOREAN CHARACTER MODE EXTENDED GRAPHIC MODE
-
-    command += iconv.encode('다른 사람들이 사용하기에 도움이 될 것입니다', 'euc-kr');
-
-    command += "\n\n\n\n";
-    command += '\x1bi'   // PAPER CUT FULL
+    var command = new Uint8Array( [
+      84, 104, 101,  32, 105, 115,  32, 116, 104, 101,  32, 102,
+      105, 114, 115, 116,  32, 108, 105, 110, 101,  10,  13,  65,
+      110, 100,  32, 116, 104, 105, 115,  32, 105, 115,  32, 116,
+      104, 101,  32, 115, 101,  99, 111, 110, 100,  10,  13,  84,
+      104, 101,  32, 105, 115,  32, 116, 104, 101,  32, 102, 105,
+      114, 115, 116,  32, 108, 105, 110, 101,  27,  45,   1,  29,
+      86,   1
+    ])
 
     port.write(command, (err) => {
       if (err) {
