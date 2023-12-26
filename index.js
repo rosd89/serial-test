@@ -1,50 +1,99 @@
 const {SerialPort} = require("serialport");
+const {encode: _encode} = require('iconv-lite')
 
-// const EscPosEncoder = require('esc-pos-encoder');
-// let encoder = new EscPosEncoder();
-// let result = encoder
-//   .codepage('windows1251')
-//   .text('The is the first line')
-//   .newline()
-//   .text('And this is the second')
-//   .newline()
-//   .text('The is the first line')
-//   .newline()
-//   .newline()
-//   .newline()
-//   .newline()
-//   .newline()
-//   .newline()
-//   .newline()
-//   .cut('partial')
-//   .encode()
-// console.log(result)
+const korea = 'EUC-KR'
+const KR = 0x0d;
+const LF = 0x0a;
+const ESC = 0x1b;
+const GS = 0x1d;
 
-const serialPort = new SerialPort({
+const initialize = () => {
+  return [ESC, 0x40];
+}
+const cut = (m, n) => {
+  const cmd = [GS, 0x56, m];
+  if (n != null) cmd.push(n);
+  return cmd;
+};
+
+const textUnderline = (n) => {
+  return [ESC, 0x2d, n];
+}
+
+const encode = (text) => {
+  return _encode(text, korea);
+}
+
+const port = new SerialPort({
   path: 'COM2',
-  baudRate: 19200,
+  baudRate: 9600,
   stopBits: 1,
   parity: 'none',
   autoOpen: false,
   flowControl: false
 });
 
+const printWithSerialPort = () => {
 
-serialPort.on("open", function() {
-  console.log("-- Connection opened --");
+  const printContent = () => {
+    let command = new Uint8Array([
+      ...initialize(),
 
-  serialPort.write(new Uint8Array( [
-      84, 104, 101,  32, 105, 115,  32, 116, 104, 101,  32, 102,
-      105, 114, 115, 116,  32, 108, 105, 110, 101,  10,  13,  65,
-      110, 100,  32, 116, 104, 105, 115,  32, 105, 115,  32, 116,
-      104, 101,  32, 115, 101,  99, 111, 110, 100,  10,  13,  84,
-      104, 101,  32, 105, 115,  32, 116, 104, 101,  32, 102, 105,
-      114, 115, 116,  32, 108, 105, 110, 101,  27,  45,   1,  29,
-      86,   1
-    ]
-  ), (err) => {
-    console.log(err)
-  })
+      ...textUnderline(),
 
-  serialPort.close()
-});
+      encode('안녕하세요.'),
+
+      ...textUnderline(),
+
+      LF,
+      LF,
+      LF,
+      LF,
+      LF,
+
+      ...cut()
+    ])
+
+    port.write(command, (err) => {
+      if (err) {
+        console.error('Error on write: ', err.message);
+        closePort()
+      } else {
+        closePort()
+      }
+    })
+  }
+
+  const openPort = () => {
+    if (!port.isOpen) {
+      port.open((err) => {
+        if (err) {
+          return console.error('Error opening port:', err.message);
+        }
+        console.log('Serial Port Opened');
+        printContent();
+      });
+    } else {
+      console.log('Port is already open')
+      printContent()
+    }
+  }
+
+  const closePort = () => {
+    if (port.isOpen) {
+      port.close((err) => {
+        if (err) {
+          return console.error('Error closing port:', err.message);
+        }
+        console.log('Serial Port Closed');
+        port.removeAllListeners('open');
+        port.removeAllListeners('data');
+      });
+    } else {
+      console.log('Port is already closed');
+    }
+  }
+  openPort()
+}
+
+printWithSerialPort()
