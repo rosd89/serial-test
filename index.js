@@ -8,19 +8,16 @@ const serialPort = new SerialPort({
 
 serialPort.on("open", function() {
   console.log("-- Connection opened --");
-  serialPort.on("data", function(data) {
-    console.log("Data received: " + data);
-  });
 
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
-  serialPort.write('123213123123123123\n', 'utf-8')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
+  serialPort.write('123213123123123123\n')
 
   serialPort.close()
 });
