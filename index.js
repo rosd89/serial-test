@@ -3,12 +3,19 @@ const {SerialPort} = require("serialport");
 // const EscPosEncoder = require('esc-pos-encoder');
 // let encoder = new EscPosEncoder();
 // let result = encoder
+//   .codepage('windows1251')
 //   .text('The is the first line')
 //   .newline()
 //   .text('And this is the second')
 //   .newline()
 //   .text('The is the first line')
-//   .underline()
+//   .newline()
+//   .newline()
+//   .newline()
+//   .newline()
+//   .newline()
+//   .newline()
+//   .newline()
 //   .cut('partial')
 //   .encode()
 // console.log(result)
