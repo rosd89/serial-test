@@ -15,7 +15,11 @@ const {SerialPort} = require("serialport");
 
 const serialPort = new SerialPort({
   path: 'COM2',
-  baudRate: 9600
+  baudRate: 19200,
+  stopBits: 1,
+  parity: 'none',
+  autoOpen: false,
+  flowControl: false
 });
 
 
@@ -31,7 +35,9 @@ serialPort.on("open", function() {
       114, 115, 116,  32, 108, 105, 110, 101,  27,  45,   1,  29,
       86,   1
     ]
-  ))
+  ), 'ascii', (err) => {
+    console.log(err)
+  })
 
   serialPort.close()
 });
