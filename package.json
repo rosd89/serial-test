@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "esc-pos-encoder": "^2.0.1",
     "serialport": "^12.0.0"
   }
 }
