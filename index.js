@@ -20,8 +20,15 @@ const textUnderline = (n) => {
   return [ESC, 0x2d, n];
 }
 
+const newLine = (n = 1) => {
+  const cmd = [];
+  for (let i = 0; i < n; i++) cmd.push(LF);
+  return cmd;
+}
+
+
 const encode = (text) => {
-  return _encode(text, korea);
+  return Array.from(_encode(text, korea));
 }
 
 const port = new SerialPort({
@@ -37,24 +44,40 @@ const printWithSerialPort = () => {
 
   const printContent = () => {
     let command = new Uint8Array([
-      ...initialize(),
+      initialize(),
 
-      ...textUnderline(),
+      textUnderline(),
 
       encode('안녕하세요.'),
 
-      ...textUnderline(),
+      textUnderline(),
 
-      LF,
-      LF,
-      LF,
-      LF,
-      LF,
+      encode('안녕하세요.'),
 
-      ...cut()
+      textUnderline(),
+
+      encode('안녕하세요.'),
+
+      textUnderline(),
+
+      encode('안녕하세요.'),
+
+      textUnderline(),
+
+      encode('안녕하세요.'),
+
+      textUnderline(),
+
+      encode('안녕하세요.'),
+
+      textUnderline(),
+
+      newLine(8),
+
+      cut()
     ])
 
-    port.write(command, (err) => {
+    port.write(command.flat(), (err) => {
       if (err) {
         console.error('Error on write: ', err.message);
         closePort()
