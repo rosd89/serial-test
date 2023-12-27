@@ -1,5 +1,6 @@
 const {SerialPort} = require("serialport");
-const {encode: _encode} = require('iconv-lite')
+const {encode: _encode} = require('iconv-lite');
+const _ = require('underscore')
 
 const korea = 'EUC-KR'
 const KR = 0x0d;
@@ -43,7 +44,7 @@ const port = new SerialPort({
 const printWithSerialPort = () => {
 
   const printContent = () => {
-    let command = new Uint8Array([
+    let command = [
       initialize(),
 
       textUnderline(),
@@ -75,9 +76,9 @@ const printWithSerialPort = () => {
       newLine(8),
 
       cut()
-    ])
+    ]
 
-    port.write(command.flat(), (err) => {
+    port.write(new Uint8Array(_.flatten(command)), (err) => {
       if (err) {
         console.error('Error on write: ', err.message);
         closePort()
