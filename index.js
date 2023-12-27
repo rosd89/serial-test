@@ -81,10 +81,8 @@ const printWithSerialPort = () => {
     port.write(new Uint8Array(_.flatten(command)), (err) => {
       if (err) {
         console.error('Error on write: ', err.message);
-        closePort()
-      } else {
-        closePort()
       }
+      // closePort()
     })
   }
 
